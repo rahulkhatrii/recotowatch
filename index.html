@@ -51,21 +51,21 @@
       <!-- LEFT ADS COLUMN -->
       <aside class="hidden xl:flex xl:col-span-2 flex-col gap-4">
         <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center min-h-[140px] text-center border-dashed border-slate-800">
-          <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 font-bold">Top Ad</span>
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 font-bold">Featured Ad</span>
           <div class="text-xs text-slate-400">Prime Video Stick • 4K Max</div>
           <span class="text-[9px] text-slate-600 mt-1">Sponsor</span>
         </div>
 
         <div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
-          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Sponsored Links</span>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Sponsored Offers</span>
           <div class="space-y-2">
             <div class="h-16 bg-slate-800/60 rounded-lg p-2 flex items-center gap-2 border border-slate-700/40">
               <div class="w-12 h-full bg-slate-700 rounded"></div>
-              <div class="text-[11px] text-slate-300">Hotstar Annual Plan</div>
+              <div class="text-[11px] text-slate-300">Hotstar Super Annual Pass</div>
             </div>
             <div class="h-16 bg-slate-800/60 rounded-lg p-2 flex items-center gap-2 border border-slate-700/40">
               <div class="w-12 h-full bg-slate-700 rounded"></div>
-              <div class="text-[11px] text-slate-300">SonyLIV LIV Premium 50% Off</div>
+              <div class="text-[11px] text-slate-300">SonyLIV Premium 50% Off</div>
             </div>
           </div>
         </div>
@@ -88,34 +88,34 @@
           <button onclick="openModal('language')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
             <span class="text-2xl mb-1">🌐</span>
             <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Language</span>
-            <span id="label-language" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Hindi, Telugu</span>
+            <span id="label-language" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Hindi</span>
           </button>
 
           <!-- Tile 3: Genre -->
           <button onclick="openModal('genre')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
             <span class="text-2xl mb-1">🎭</span>
             <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Genre</span>
-            <span id="label-genre" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Thriller, Crime</span>
+            <span id="label-genre" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Thriller</span>
           </button>
 
           <!-- Tile 4: Streaming Now -->
           <button onclick="openModal('platform')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
             <span class="text-2xl mb-1">📺</span>
-            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Streaming Now</span>
-            <span id="label-platform" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Netflix, SonyLIV</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Streaming On</span>
+            <span id="label-platform" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Netflix</span>
           </button>
 
-          <!-- Tile 5: Time -->
-          <button onclick="openModal('time')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer col-span-2 sm:col-span-1">
-            <span class="text-2xl mb-1">⏳</span>
-            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Time</span>
-            <span id="label-time" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Standard</span>
+          <!-- Tile 5: Min Rating -->
+          <button onclick="openModal('minRating')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer col-span-2 sm:col-span-1">
+            <span class="text-2xl mb-1">⭐</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Rating</span>
+            <span id="label-minRating" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">7+ IMDb</span>
           </button>
         </div>
 
         <!-- Action Buttons -->
         <div class="flex items-center gap-4 mb-8">
-          <button onclick="shuffleMovie()" class="flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-rose-950/50 transition-transform active:scale-95 text-sm uppercase tracking-wider">
+          <button id="shuffleBtn" onclick="fetchAndShuffle()" class="flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-rose-950/50 transition-all active:scale-95 text-sm uppercase tracking-wider">
             <span>🎲</span> Shuffle
           </button>
           <button onclick="markWatchedAndNext()" class="flex items-center gap-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-6 py-3 rounded-full text-sm font-semibold transition-transform active:scale-95">
@@ -127,40 +127,39 @@
         <div id="movieCard" class="glass-card rounded-3xl p-6 w-full max-w-2xl border border-slate-700/50 shadow-2xl relative overflow-hidden transition-all duration-300">
           <div class="flex flex-col sm:flex-row gap-6 items-start">
             <div class="w-full sm:w-44 h-64 rounded-2xl overflow-hidden shrink-0 border border-slate-700/60 shadow-inner bg-slate-800">
-              <img id="cardPoster" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80" alt="Poster" class="w-full h-full object-cover" />
+              <img id="cardPoster" src="" alt="Poster" class="w-full h-full object-cover" />
             </div>
 
             <div class="flex-1 flex flex-col justify-between h-full space-y-4">
               <div>
                 <div class="flex items-start justify-between gap-2">
-                  <h2 id="cardTitle" class="text-2xl font-black text-white leading-tight">Bengaluru Boom</h2>
+                  <h2 id="cardTitle" class="text-2xl font-black text-white leading-tight">Loading...</h2>
                   <div class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg shrink-0">
-                    <span class="bg-[#f5c518] text-black font-extrabold text-[10px] px-1 rounded-sm">IMDb</span>
-                    <span id="cardRating" class="text-amber-400 font-bold text-xs">8.1</span>
+                    <span class="bg-[#f5c518] text-black font-extrabold text-[10px] px-1 rounded-sm">TMDB</span>
+                    <span id="cardRating" class="text-amber-400 font-bold text-xs">--</span>
                   </div>
                 </div>
                 
-                <p id="cardMeta" class="text-xs font-semibold text-rose-400 mt-1">Telugu Thriller • 131 mins</p>
+                <p id="cardMeta" class="text-xs font-semibold text-rose-400 mt-1">Fetching details...</p>
                 <p id="cardSynopsis" class="text-xs text-slate-300 mt-3 leading-relaxed">
-                  An ordinary cab driver in Hyderabad is pulled into a high-stakes conspiracy between rival tech tycoons and local syndicate leaders over the course of a single chaotic night.
+                  Hold tight while we pull a curated recommendation for you.
                 </p>
               </div>
 
               <div>
                 <div class="flex items-center gap-2 mb-4">
-                  <span class="text-[11px] text-slate-400 font-medium">Stream on:</span>
-                  <div id="cardPlatformBadges" class="flex items-center gap-2">
-                    <span class="bg-blue-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">SonyLIV</span>
-                    <span class="bg-sky-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">Prime Video</span>
+                  <span class="text-[11px] text-slate-400 font-medium">Available on:</span>
+                  <div id="cardPlatformBadges" class="flex flex-wrap items-center gap-1.5">
+                    <span class="text-[10px] text-slate-500">Checking providers...</span>
                   </div>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
                   <a id="cardTrailerBtn" href="#" target="_blank" class="bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-1.5">
-                    <span>▶</span> Play Trailer
+                    <span>▶</span> YouTube Trailer
                   </a>
-                  <a id="cardStreamBtn" href="#" target="_blank" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-blue-950">
-                    <span>📺</span> Watch Now
+                  <a id="cardTmdbBtn" href="#" target="_blank" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-blue-950">
+                    <span>🎬</span> View on TMDB
                   </a>
                 </div>
               </div>
@@ -168,12 +167,17 @@
           </div>
         </div>
 
+        <!-- Attribution Footer (Required by TMDB Terms) -->
+        <footer class="mt-12 text-center text-slate-500 text-[11px] flex flex-col items-center gap-1">
+          <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+        </footer>
+
       </main>
 
       <!-- RIGHT ADS COLUMN -->
       <aside class="hidden xl:flex xl:col-span-2 flex-col gap-4">
         <div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
-          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Recommended Picks</span>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Trending Shows</span>
           <div class="space-y-2">
             <div class="h-20 bg-slate-800/60 rounded-lg p-2 flex gap-2 border border-slate-700/40">
               <div class="w-12 h-full bg-slate-700 rounded shrink-0"></div>
@@ -185,8 +189,8 @@
             <div class="h-20 bg-slate-800/60 rounded-lg p-2 flex gap-2 border border-slate-700/40">
               <div class="w-12 h-full bg-slate-700 rounded shrink-0"></div>
               <div class="text-[11px] text-slate-300 flex flex-col justify-between">
-                <span class="font-bold truncate">Manjummel Boys</span>
-                <span class="text-[9px] text-rose-400">Hotstar</span>
+                <span class="font-bold truncate">Panchayat Season 3</span>
+                <span class="text-[9px] text-rose-400">Prime Video</span>
               </div>
             </div>
           </div>
@@ -214,107 +218,70 @@
   </div>
 
   <script>
-    const MOVIES_DATABASE = [
-      {
-        id: 1,
-        title: "Bengaluru Boom",
-        type: "Movie",
-        languages: ["Telugu"],
-        genres: ["Thriller", "Crime", "Action"],
-        platforms: ["SonyLIV", "Prime Video"],
-        time: "Standard",
-        rating: "8.1",
-        meta: "Telugu Thriller • 131 mins",
-        synopsis: "An ordinary cab driver in Hyderabad is pulled into a high-stakes conspiracy between rival tech tycoons and local syndicate leaders over the course of a single chaotic night.",
-        poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80",
-        trailer: "https://youtube.com",
-        streamUrl: "https://sonyliv.com"
-      },
-      {
-        id: 2,
-        title: "Kohrra",
-        type: "TV Show",
-        languages: ["Hindi", "Punjabi"],
-        genres: ["Crime", "Thriller"],
-        platforms: ["Netflix"],
-        time: "Quick Binge",
-        rating: "7.6",
-        meta: "Hindi / Punjabi • 1 Season (6 Episodes)",
-        synopsis: "When an NRI groom is discovered dead days before his lavish wedding in Punjab, two troubled police officers unravel a web of deceit and family trauma.",
-        poster: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80",
-        trailer: "https://youtube.com",
-        streamUrl: "https://netflix.com"
-      },
-      {
-        id: 3,
-        title: "Aavesham",
-        type: "Movie",
-        languages: ["Malayalam"],
-        genres: ["Comedy", "Action"],
-        platforms: ["Prime Video"],
-        time: "Standard",
-        rating: "7.9",
-        meta: "Malayalam • 158 mins",
-        synopsis: "Three college students in Bangalore seeking protection from college bullies find an eccentric local gangster who adopts them into his bizarre entourage.",
-        poster: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=400&q=80",
-        trailer: "https://youtube.com",
-        streamUrl: "https://primevideo.com"
-      },
-      {
-        id: 4,
-        title: "Farzi",
-        type: "TV Show",
-        languages: ["Hindi"],
-        genres: ["Crime", "Thriller"],
-        platforms: ["Prime Video"],
-        time: "Deep Binge",
-        rating: "8.4",
-        meta: "Hindi • 1 Season (8 Episodes)",
-        synopsis: "A brilliant small-time artist devises the ultimate currency counterfeit scheme and gets tracked by an unorthodox, relentless task force officer.",
-        poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=400&q=80",
-        trailer: "https://youtube.com",
-        streamUrl: "https://primevideo.com"
-      }
-    ];
+    // TMDB CONFIGURATION - PASTE YOUR API KEY HERE
+    const TMDB_API_KEY = "ac60f33e0888d524e4a5252a23d32f94";
+    const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+
+    // ID Mappings for TMDB Discover API
+    const GENRE_MAP = {
+      "Action": 28,
+      "Comedy": 35,
+      "Crime": 80,
+      "Drama": 18,
+      "Horror": 27,
+      "Romance": 10749,
+      "Sci-Fi": 878,
+      "Thriller": 53,
+      "Mystery": 9648
+    };
+
+    const LANG_MAP = {
+      "Hindi": "hi",
+      "English": "en",
+      "Telugu": "te",
+      "Tamil": "ta",
+      "Malayalam": "ml",
+      "Kannada": "kn",
+      "Bengali": "bn"
+    };
+
+    // TMDB Watch Provider IDs for India (IN)
+    const PROVIDER_MAP = {
+      "Netflix": 8,
+      "Prime Video": 119,
+      "Hotstar": 122,
+      "SonyLIV": 237,
+      "ZEE5": 232,
+      "JioCinema": 220
+    };
 
     const CONFIG = {
-      type: { multi: false, options: ["Any", "Movie", "TV Show", "Miniseries", "Docuseries"] },
-      language: { multi: true, options: ["Hindi", "English", "Telugu", "Tamil", "Malayalam", "Kannada", "Bengali"] },
-      genre: { multi: true, options: ["Action", "Thriller", "Crime", "Comedy", "Romance", "Sci-Fi", "Horror", "Slice-of-Life"] },
-      platform: { multi: true, options: ["Netflix", "Hotstar", "Prime Video", "SonyLIV", "ZEE5", "Aha"] },
-      time: { multi: false, options: ["Any", "Quick Watch (<90m)", "Standard", "Epic (>130m)", "Quick Binge", "Deep Binge"] }
+      type: { multi: false, options: ["Movie", "TV Show"] },
+      language: { multi: false, options: ["Any", "Hindi", "English", "Telugu", "Tamil", "Malayalam", "Kannada", "Bengali"] },
+      genre: { multi: false, options: ["Any", "Action", "Comedy", "Crime", "Drama", "Horror", "Romance", "Sci-Fi", "Thriller", "Mystery"] },
+      platform: { multi: false, options: ["Any", "Netflix", "Prime Video", "Hotstar", "SonyLIV", "ZEE5", "JioCinema"] },
+      minRating: { multi: false, options: ["Any", "6+ Rating", "7+ Rating", "8+ Rating"] }
     };
 
     let filters = {
       type: "Movie",
-      language: JSON.parse(localStorage.getItem("cine_lang")) || ["Hindi", "Telugu"],
-      genre: JSON.parse(localStorage.getItem("cine_genre")) || ["Thriller", "Crime"],
-      platform: JSON.parse(localStorage.getItem("cine_plat")) || ["Netflix", "SonyLIV"],
-      time: "Standard"
+      language: "Hindi",
+      genre: "Thriller",
+      platform: "Netflix",
+      minRating: "7+ Rating"
     };
 
-    let watchedIds = JSON.parse(localStorage.getItem("cine_watched")) || [];
+    let watchedIds = JSON.parse(localStorage.getItem("recoto_watched")) || [];
+    let moviePool = [];
     let activeModal = null;
-    let tempModalSelection = [];
+    let tempModalSelection = "";
 
     function updateTileLabels() {
       document.getElementById("label-type").innerText = filters.type;
-      document.getElementById("label-language").innerText = 
-        filters.language.length === 0 ? "Any" :
-        filters.language.length === 1 ? filters.language[0] :
-        `${filters.language[0]} +${filters.language.length - 1}`;
-
-      document.getElementById("label-genre").innerText = 
-        filters.genre.length === 0 ? "Any" :
-        filters.genre.length === 1 ? filters.genre[0] :
-        `${filters.genre[0]} +${filters.genre.length - 1}`;
-
-      document.getElementById("label-platform").innerText = 
-        filters.platform.length === 0 ? "Any" :
-        filters.platform.length === 1 ? filters.platform[0] :
-        `${filters.platform[0]} +${filters.platform.length - 1}`;
-
-      document.getElementById("label-time").innerText = filters.time;
+      document.getElementById("label-language").innerText = filters.language;
+      document.getElementById("label-genre").innerText = filters.genre;
+      document.getElementById("label-platform").innerText = filters.platform;
+      document.getElementById("label-minRating").innerText = filters.minRating;
     }
 
     function openModal(filterKey) {
@@ -327,10 +294,10 @@
       container.innerHTML = "";
 
       const conf = CONFIG[filterKey];
-      tempModalSelection = conf.multi ? [...filters[filterKey]] : filters[filterKey];
+      tempModalSelection = filters[filterKey];
 
       conf.options.forEach(opt => {
-        const isSelected = conf.multi ? tempModalSelection.includes(opt) : tempModalSelection === opt;
+        const isSelected = tempModalSelection === opt;
         const btn = document.createElement("button");
         btn.className = `p-2.5 text-xs font-semibold rounded-xl border transition text-left flex items-center justify-between ${
           isSelected 
@@ -338,28 +305,14 @@
             : "bg-slate-800/40 border-slate-700/60 text-slate-300 hover:bg-slate-800"
         }`;
         btn.innerHTML = `<span>${opt}</span><span class="${isSelected ? 'inline' : 'hidden'}">✓</span>`;
-        btn.onclick = () => toggleOption(opt, btn, conf.multi);
+        btn.onclick = () => {
+          tempModalSelection = opt;
+          applyModalSelection();
+        };
         container.appendChild(btn);
       });
 
       modal.classList.remove("hidden");
-    }
-
-    function toggleOption(opt, btn, isMulti) {
-      if (isMulti) {
-        if (tempModalSelection.includes(opt)) {
-          tempModalSelection = tempModalSelection.filter(x => x !== opt);
-          btn.className = "p-2.5 text-xs font-semibold rounded-xl border border-slate-700/60 bg-slate-800/40 text-slate-300 transition text-left flex items-center justify-between";
-          btn.children[1].className = "hidden";
-        } else {
-          tempModalSelection.push(opt);
-          btn.className = "p-2.5 text-xs font-semibold rounded-xl border border-rose-500 bg-rose-600/20 text-rose-300 transition text-left flex items-center justify-between";
-          btn.children[1].className = "inline";
-        }
-      } else {
-        tempModalSelection = opt;
-        applyModalSelection();
-      }
     }
 
     function closeModal() {
@@ -367,69 +320,110 @@
     }
 
     function clearCurrentFilter() {
-      if (CONFIG[activeModal].multi) {
-        tempModalSelection = [];
-      } else {
-        tempModalSelection = "Any";
-      }
+      tempModalSelection = "Any";
       applyModalSelection();
     }
 
     function applyModalSelection() {
       filters[activeModal] = tempModalSelection;
-      if (activeModal === "platform") localStorage.setItem("cine_plat", JSON.stringify(filters.platform));
-      if (activeModal === "language") localStorage.setItem("cine_lang", JSON.stringify(filters.language));
-      if (activeModal === "genre") localStorage.setItem("cine_genre", JSON.stringify(filters.genre));
       updateTileLabels();
       closeModal();
-      shuffleMovie();
+      moviePool = []; // Invalidate pool to fetch fresh results
+      fetchAndShuffle();
     }
 
-    function shuffleMovie() {
+    async function fetchAndShuffle() {
       const card = document.getElementById("movieCard");
       card.classList.add("opacity-50", "scale-[0.99]");
 
-      setTimeout(() => {
-        const eligible = MOVIES_DATABASE.filter(m => {
-          if (watchedIds.includes(m.id)) return false;
-          if (filters.type !== "Any" && m.type !== filters.type) return false;
-          if (filters.language.length > 0 && !m.languages.some(l => filters.language.includes(l))) return false;
-          if (filters.genre.length > 0 && !m.genres.some(g => filters.genre.includes(g))) return false;
-          if (filters.platform.length > 0 && !m.platforms.some(p => filters.platform.includes(p))) return false;
-          return true;
-        });
+      if (moviePool.length === 0) {
+        await queryTmdbApi();
+      }
 
-        const selected = eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : MOVIES_DATABASE[0];
+      // Filter out movies marked as watched
+      let eligible = moviePool.filter(m => !watchedIds.includes(m.id));
 
-        document.getElementById("cardTitle").innerText = selected.title;
-        document.getElementById("cardRating").innerText = selected.rating;
-        document.getElementById("cardMeta").innerText = selected.meta;
-        document.getElementById("cardSynopsis").innerText = selected.synopsis;
-        document.getElementById("cardPoster").src = selected.poster;
-        document.getElementById("cardTrailerBtn").href = selected.trailer;
-        document.getElementById("cardStreamBtn").href = selected.streamUrl;
-        
-        const badgesContainer = document.getElementById("cardPlatformBadges");
-        badgesContainer.innerHTML = selected.platforms.map(p => 
-          `<span class="bg-blue-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">${p}</span>`
-        ).join("");
-
-        card.dataset.currentId = selected.id;
+      if (eligible.length === 0) {
+        document.getElementById("cardTitle").innerText = "No More Results";
+        document.getElementById("cardSynopsis").innerText = "Try loosening your filters (e.g. select 'Any' for genre or streaming platform) to discover more titles.";
         card.classList.remove("opacity-50", "scale-[0.99]");
-      }, 150);
+        return;
+      }
+
+      const selected = eligible[Math.floor(Math.random() * eligible.length)];
+      renderMovie(selected);
+      card.classList.remove("opacity-50", "scale-[0.99]");
+    }
+
+    async function queryTmdbApi() {
+      const endpoint = filters.type === "TV Show" ? "discover/tv" : "discover/movie";
+      const randomPage = Math.floor(Math.random() * 3) + 1; // Pull from top 3 pages randomly
+
+      let url = `https://api.themoviedb.org/3/${endpoint}?api_key=${TMDB_API_KEY}&watch_region=IN&sort_by=popularity.desc&page=${randomPage}`;
+
+      if (filters.language !== "Any" && LANG_MAP[filters.language]) {
+        url += `&with_original_language=${LANG_MAP[filters.language]}`;
+      }
+
+      if (filters.genre !== "Any" && GENRE_MAP[filters.genre]) {
+        url += `&with_genres=${GENRE_MAP[filters.genre]}`;
+      }
+
+      if (filters.platform !== "Any" && PROVIDER_MAP[filters.platform]) {
+        url += `&with_watch_providers=${PROVIDER_MAP[filters.platform]}`;
+      }
+
+      if (filters.minRating !== "Any") {
+        const vote = parseInt(filters.minRating);
+        url += `&vote_average.gte=${vote}&vote_count.gte=20`;
+      }
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data.results && data.results.length > 0) {
+          moviePool = data.results;
+        }
+      } catch (err) {
+        console.error("TMDB API Error:", err);
+      }
+    }
+
+    function renderMovie(item) {
+      const title = item.title || item.name;
+      const releaseYear = (item.release_date || item.first_air_date || "").split("-")[0];
+      const rating = item.vote_average ? item.vote_average.toFixed(1) : "N/A";
+      const posterUrl = item.poster_path ? `${TMDB_IMAGE_BASE}${item.poster_path}` : "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80";
+
+      document.getElementById("cardTitle").innerText = title;
+      document.getElementById("cardRating").innerText = rating;
+      document.getElementById("cardMeta").innerText = `${releaseYear ? releaseYear + ' • ' : ''}${filters.language !== 'Any' ? filters.language : 'Global'} • ${filters.type}`;
+      document.getElementById("cardSynopsis").innerText = item.overview || "No synopsis available for this title.";
+      document.getElementById("cardPoster").src = posterUrl;
+      document.getElementById("cardTrailerBtn").href = `https://www.youtube.com/results?search_query=${encodeURIComponent(title + " trailer")}`;
+      document.getElementById("cardTmdbBtn").href = `https://www.themoviedb.org/${filters.type === "TV Show" ? "tv" : "movie"}/${item.id}`;
+
+      // Update Streaming Badges
+      const badgesContainer = document.getElementById("cardPlatformBadges");
+      badgesContainer.innerHTML = filters.platform !== "Any"
+        ? `<span class="bg-blue-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">${filters.platform}</span>`
+        : `<span class="bg-slate-800 text-slate-300 font-bold text-[10px] px-2 py-0.5 rounded border border-slate-700">Check TMDB link</span>`;
+
+      document.getElementById("movieCard").dataset.currentId = item.id;
     }
 
     function markWatchedAndNext() {
       const currentId = parseInt(document.getElementById("movieCard").dataset.currentId);
       if (currentId && !watchedIds.includes(currentId)) {
         watchedIds.push(currentId);
-        localStorage.setItem("cine_watched", JSON.stringify(watchedIds));
+        localStorage.setItem("recoto_watched", JSON.stringify(watchedIds));
       }
-      shuffleMovie();
+      fetchAndShuffle();
     }
 
+    // Initialize UI
     updateTileLabels();
-    shuffleMovie();
+    fetchAndShuffle();
   </script>
 </body>
 </html>
