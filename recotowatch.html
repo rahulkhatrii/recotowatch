@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecoToWatch — Zero Decision Fatigue. One Perfect Suggestion.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(18, 22, 34, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-tile {
+      background: rgba(22, 28, 42, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+    .glass-tile:hover {
+      background: rgba(30, 39, 58, 0.8);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-[#0b0e14] text-slate-100 min-h-screen relative overflow-x-hidden selection:bg-rose-600 selection:text-white">
+
+  <!-- Ambient Backdrop Glow -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-rose-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 rounded-full blur-[130px]"></div>
+  </div>
+
+  <div class="relative z-10 max-w-[1520px] mx-auto px-4 py-8 flex flex-col min-h-screen">
+    
+    <!-- Header -->
+    <header class="text-center mb-8">
+      <h1 class="text-3xl md:text-5xl font-black tracking-wider text-white">RECOTOWATCH</h1>
+      <p class="text-slate-400 text-xs md:text-sm mt-2 font-medium tracking-wide">Zero Decision Fatigue. One Perfect Suggestion.</p>
+    </header>
+
+    <!-- Main Grid: Left Ad Bar | Center Core UX | Right Ad Bar -->
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start flex-1">
+      
+      <!-- LEFT ADS COLUMN -->
+      <aside class="hidden xl:flex xl:col-span-2 flex-col gap-4">
+        <div class="glass-card p-4 rounded-2xl flex flex-col items-center justify-center min-h-[140px] text-center border-dashed border-slate-800">
+          <span class="text-[10px] uppercase tracking-widest text-slate-500 mb-2 font-bold">Top Ad</span>
+          <div class="text-xs text-slate-400">Prime Video Stick • 4K Max</div>
+          <span class="text-[9px] text-slate-600 mt-1">Sponsor</span>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Sponsored Links</span>
+          <div class="space-y-2">
+            <div class="h-16 bg-slate-800/60 rounded-lg p-2 flex items-center gap-2 border border-slate-700/40">
+              <div class="w-12 h-full bg-slate-700 rounded"></div>
+              <div class="text-[11px] text-slate-300">Hotstar Annual Plan</div>
+            </div>
+            <div class="h-16 bg-slate-800/60 rounded-lg p-2 flex items-center gap-2 border border-slate-700/40">
+              <div class="w-12 h-full bg-slate-700 rounded"></div>
+              <div class="text-[11px] text-slate-300">SonyLIV LIV Premium 50% Off</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER WORKSPACE -->
+      <main class="xl:col-span-8 flex flex-col items-center">
+        
+        <!-- 5 Interactive Glass Tiles -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 w-full max-w-4xl mb-6">
+          
+          <!-- Tile 1: Type -->
+          <button onclick="openModal('type')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
+            <span class="text-2xl mb-1">🎬</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Type</span>
+            <span id="label-type" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Movie</span>
+          </button>
+
+          <!-- Tile 2: Language -->
+          <button onclick="openModal('language')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
+            <span class="text-2xl mb-1">🌐</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Language</span>
+            <span id="label-language" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Hindi, Telugu</span>
+          </button>
+
+          <!-- Tile 3: Genre -->
+          <button onclick="openModal('genre')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
+            <span class="text-2xl mb-1">🎭</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Genre</span>
+            <span id="label-genre" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Thriller, Crime</span>
+          </button>
+
+          <!-- Tile 4: Streaming Now -->
+          <button onclick="openModal('platform')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer">
+            <span class="text-2xl mb-1">📺</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Streaming Now</span>
+            <span id="label-platform" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Netflix, SonyLIV</span>
+          </button>
+
+          <!-- Tile 5: Time -->
+          <button onclick="openModal('time')" class="glass-tile p-4 rounded-2xl flex flex-col items-center text-center cursor-pointer col-span-2 sm:col-span-1">
+            <span class="text-2xl mb-1">⏳</span>
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Time</span>
+            <span id="label-time" class="text-xs text-rose-400 font-medium mt-0.5 truncate max-w-full">Standard</span>
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-4 mb-8">
+          <button onclick="shuffleMovie()" class="flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold px-8 py-3 rounded-full shadow-lg shadow-rose-950/50 transition-transform active:scale-95 text-sm uppercase tracking-wider">
+            <span>🎲</span> Shuffle
+          </button>
+          <button onclick="markWatchedAndNext()" class="flex items-center gap-2 bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700/80 px-6 py-3 rounded-full text-sm font-semibold transition-transform active:scale-95">
+            <span>✓</span> Watched It / Next
+          </button>
+        </div>
+
+        <!-- Recommendation Card -->
+        <div id="movieCard" class="glass-card rounded-3xl p-6 w-full max-w-2xl border border-slate-700/50 shadow-2xl relative overflow-hidden transition-all duration-300">
+          <div class="flex flex-col sm:flex-row gap-6 items-start">
+            <div class="w-full sm:w-44 h-64 rounded-2xl overflow-hidden shrink-0 border border-slate-700/60 shadow-inner bg-slate-800">
+              <img id="cardPoster" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80" alt="Poster" class="w-full h-full object-cover" />
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between h-full space-y-4">
+              <div>
+                <div class="flex items-start justify-between gap-2">
+                  <h2 id="cardTitle" class="text-2xl font-black text-white leading-tight">Bengaluru Boom</h2>
+                  <div class="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg shrink-0">
+                    <span class="bg-[#f5c518] text-black font-extrabold text-[10px] px-1 rounded-sm">IMDb</span>
+                    <span id="cardRating" class="text-amber-400 font-bold text-xs">8.1</span>
+                  </div>
+                </div>
+                
+                <p id="cardMeta" class="text-xs font-semibold text-rose-400 mt-1">Telugu Thriller • 131 mins</p>
+                <p id="cardSynopsis" class="text-xs text-slate-300 mt-3 leading-relaxed">
+                  An ordinary cab driver in Hyderabad is pulled into a high-stakes conspiracy between rival tech tycoons and local syndicate leaders over the course of a single chaotic night.
+                </p>
+              </div>
+
+              <div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-[11px] text-slate-400 font-medium">Stream on:</span>
+                  <div id="cardPlatformBadges" class="flex items-center gap-2">
+                    <span class="bg-blue-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">SonyLIV</span>
+                    <span class="bg-sky-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">Prime Video</span>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                  <a id="cardTrailerBtn" href="#" target="_blank" class="bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold px-4 py-2 rounded-xl transition flex items-center gap-1.5">
+                    <span>▶</span> Play Trailer
+                  </a>
+                  <a id="cardStreamBtn" href="#" target="_blank" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-1.5 shadow-md shadow-blue-950">
+                    <span>📺</span> Watch Now
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- RIGHT ADS COLUMN -->
+      <aside class="hidden xl:flex xl:col-span-2 flex-col gap-4">
+        <div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Recommended Picks</span>
+          <div class="space-y-2">
+            <div class="h-20 bg-slate-800/60 rounded-lg p-2 flex gap-2 border border-slate-700/40">
+              <div class="w-12 h-full bg-slate-700 rounded shrink-0"></div>
+              <div class="text-[11px] text-slate-300 flex flex-col justify-between">
+                <span class="font-bold truncate">Mirzapur Season 3</span>
+                <span class="text-[9px] text-rose-400">Prime Video</span>
+              </div>
+            </div>
+            <div class="h-20 bg-slate-800/60 rounded-lg p-2 flex gap-2 border border-slate-700/40">
+              <div class="w-12 h-full bg-slate-700 rounded shrink-0"></div>
+              <div class="text-[11px] text-slate-300 flex flex-col justify-between">
+                <span class="font-bold truncate">Manjummel Boys</span>
+                <span class="text-[9px] text-rose-400">Hotstar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- POP-OVER MODAL -->
+  <div id="filterModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-md rounded-3xl p-6 border border-slate-700 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <h3 id="modalTitle" class="text-base font-bold text-white uppercase tracking-wider">Select</h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <div id="modalOptions" class="grid grid-cols-2 gap-2 my-5 max-h-64 overflow-y-auto pr-1"></div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-slate-800">
+        <button onclick="clearCurrentFilter()" class="text-xs text-slate-400 hover:text-rose-400">Clear All</button>
+        <button onclick="applyModalSelection()" class="bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold px-5 py-2 rounded-xl">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const MOVIES_DATABASE = [
+      {
+        id: 1,
+        title: "Bengaluru Boom",
+        type: "Movie",
+        languages: ["Telugu"],
+        genres: ["Thriller", "Crime", "Action"],
+        platforms: ["SonyLIV", "Prime Video"],
+        time: "Standard",
+        rating: "8.1",
+        meta: "Telugu Thriller • 131 mins",
+        synopsis: "An ordinary cab driver in Hyderabad is pulled into a high-stakes conspiracy between rival tech tycoons and local syndicate leaders over the course of a single chaotic night.",
+        poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=400&q=80",
+        trailer: "https://youtube.com",
+        streamUrl: "https://sonyliv.com"
+      },
+      {
+        id: 2,
+        title: "Kohrra",
+        type: "TV Show",
+        languages: ["Hindi", "Punjabi"],
+        genres: ["Crime", "Thriller"],
+        platforms: ["Netflix"],
+        time: "Quick Binge",
+        rating: "7.6",
+        meta: "Hindi / Punjabi • 1 Season (6 Episodes)",
+        synopsis: "When an NRI groom is discovered dead days before his lavish wedding in Punjab, two troubled police officers unravel a web of deceit and family trauma.",
+        poster: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80",
+        trailer: "https://youtube.com",
+        streamUrl: "https://netflix.com"
+      },
+      {
+        id: 3,
+        title: "Aavesham",
+        type: "Movie",
+        languages: ["Malayalam"],
+        genres: ["Comedy", "Action"],
+        platforms: ["Prime Video"],
+        time: "Standard",
+        rating: "7.9",
+        meta: "Malayalam • 158 mins",
+        synopsis: "Three college students in Bangalore seeking protection from college bullies find an eccentric local gangster who adopts them into his bizarre entourage.",
+        poster: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?auto=format&fit=crop&w=400&q=80",
+        trailer: "https://youtube.com",
+        streamUrl: "https://primevideo.com"
+      },
+      {
+        id: 4,
+        title: "Farzi",
+        type: "TV Show",
+        languages: ["Hindi"],
+        genres: ["Crime", "Thriller"],
+        platforms: ["Prime Video"],
+        time: "Deep Binge",
+        rating: "8.4",
+        meta: "Hindi • 1 Season (8 Episodes)",
+        synopsis: "A brilliant small-time artist devises the ultimate currency counterfeit scheme and gets tracked by an unorthodox, relentless task force officer.",
+        poster: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=400&q=80",
+        trailer: "https://youtube.com",
+        streamUrl: "https://primevideo.com"
+      }
+    ];
+
+    const CONFIG = {
+      type: { multi: false, options: ["Any", "Movie", "TV Show", "Miniseries", "Docuseries"] },
+      language: { multi: true, options: ["Hindi", "English", "Telugu", "Tamil", "Malayalam", "Kannada", "Bengali"] },
+      genre: { multi: true, options: ["Action", "Thriller", "Crime", "Comedy", "Romance", "Sci-Fi", "Horror", "Slice-of-Life"] },
+      platform: { multi: true, options: ["Netflix", "Hotstar", "Prime Video", "SonyLIV", "ZEE5", "Aha"] },
+      time: { multi: false, options: ["Any", "Quick Watch (<90m)", "Standard", "Epic (>130m)", "Quick Binge", "Deep Binge"] }
+    };
+
+    let filters = {
+      type: "Movie",
+      language: JSON.parse(localStorage.getItem("cine_lang")) || ["Hindi", "Telugu"],
+      genre: JSON.parse(localStorage.getItem("cine_genre")) || ["Thriller", "Crime"],
+      platform: JSON.parse(localStorage.getItem("cine_plat")) || ["Netflix", "SonyLIV"],
+      time: "Standard"
+    };
+
+    let watchedIds = JSON.parse(localStorage.getItem("cine_watched")) || [];
+    let activeModal = null;
+    let tempModalSelection = [];
+
+    function updateTileLabels() {
+      document.getElementById("label-type").innerText = filters.type;
+      document.getElementById("label-language").innerText = 
+        filters.language.length === 0 ? "Any" :
+        filters.language.length === 1 ? filters.language[0] :
+        `${filters.language[0]} +${filters.language.length - 1}`;
+
+      document.getElementById("label-genre").innerText = 
+        filters.genre.length === 0 ? "Any" :
+        filters.genre.length === 1 ? filters.genre[0] :
+        `${filters.genre[0]} +${filters.genre.length - 1}`;
+
+      document.getElementById("label-platform").innerText = 
+        filters.platform.length === 0 ? "Any" :
+        filters.platform.length === 1 ? filters.platform[0] :
+        `${filters.platform[0]} +${filters.platform.length - 1}`;
+
+      document.getElementById("label-time").innerText = filters.time;
+    }
+
+    function openModal(filterKey) {
+      activeModal = filterKey;
+      const modal = document.getElementById("filterModal");
+      const title = document.getElementById("modalTitle");
+      const container = document.getElementById("modalOptions");
+
+      title.innerText = `Select ${filterKey}`;
+      container.innerHTML = "";
+
+      const conf = CONFIG[filterKey];
+      tempModalSelection = conf.multi ? [...filters[filterKey]] : filters[filterKey];
+
+      conf.options.forEach(opt => {
+        const isSelected = conf.multi ? tempModalSelection.includes(opt) : tempModalSelection === opt;
+        const btn = document.createElement("button");
+        btn.className = `p-2.5 text-xs font-semibold rounded-xl border transition text-left flex items-center justify-between ${
+          isSelected 
+            ? "bg-rose-600/20 border-rose-500 text-rose-300" 
+            : "bg-slate-800/40 border-slate-700/60 text-slate-300 hover:bg-slate-800"
+        }`;
+        btn.innerHTML = `<span>${opt}</span><span class="${isSelected ? 'inline' : 'hidden'}">✓</span>`;
+        btn.onclick = () => toggleOption(opt, btn, conf.multi);
+        container.appendChild(btn);
+      });
+
+      modal.classList.remove("hidden");
+    }
+
+    function toggleOption(opt, btn, isMulti) {
+      if (isMulti) {
+        if (tempModalSelection.includes(opt)) {
+          tempModalSelection = tempModalSelection.filter(x => x !== opt);
+          btn.className = "p-2.5 text-xs font-semibold rounded-xl border border-slate-700/60 bg-slate-800/40 text-slate-300 transition text-left flex items-center justify-between";
+          btn.children[1].className = "hidden";
+        } else {
+          tempModalSelection.push(opt);
+          btn.className = "p-2.5 text-xs font-semibold rounded-xl border border-rose-500 bg-rose-600/20 text-rose-300 transition text-left flex items-center justify-between";
+          btn.children[1].className = "inline";
+        }
+      } else {
+        tempModalSelection = opt;
+        applyModalSelection();
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("filterModal").classList.add("hidden");
+    }
+
+    function clearCurrentFilter() {
+      if (CONFIG[activeModal].multi) {
+        tempModalSelection = [];
+      } else {
+        tempModalSelection = "Any";
+      }
+      applyModalSelection();
+    }
+
+    function applyModalSelection() {
+      filters[activeModal] = tempModalSelection;
+      if (activeModal === "platform") localStorage.setItem("cine_plat", JSON.stringify(filters.platform));
+      if (activeModal === "language") localStorage.setItem("cine_lang", JSON.stringify(filters.language));
+      if (activeModal === "genre") localStorage.setItem("cine_genre", JSON.stringify(filters.genre));
+      updateTileLabels();
+      closeModal();
+      shuffleMovie();
+    }
+
+    function shuffleMovie() {
+      const card = document.getElementById("movieCard");
+      card.classList.add("opacity-50", "scale-[0.99]");
+
+      setTimeout(() => {
+        const eligible = MOVIES_DATABASE.filter(m => {
+          if (watchedIds.includes(m.id)) return false;
+          if (filters.type !== "Any" && m.type !== filters.type) return false;
+          if (filters.language.length > 0 && !m.languages.some(l => filters.language.includes(l))) return false;
+          if (filters.genre.length > 0 && !m.genres.some(g => filters.genre.includes(g))) return false;
+          if (filters.platform.length > 0 && !m.platforms.some(p => filters.platform.includes(p))) return false;
+          return true;
+        });
+
+        const selected = eligible.length > 0 ? eligible[Math.floor(Math.random() * eligible.length)] : MOVIES_DATABASE[0];
+
+        document.getElementById("cardTitle").innerText = selected.title;
+        document.getElementById("cardRating").innerText = selected.rating;
+        document.getElementById("cardMeta").innerText = selected.meta;
+        document.getElementById("cardSynopsis").innerText = selected.synopsis;
+        document.getElementById("cardPoster").src = selected.poster;
+        document.getElementById("cardTrailerBtn").href = selected.trailer;
+        document.getElementById("cardStreamBtn").href = selected.streamUrl;
+        
+        const badgesContainer = document.getElementById("cardPlatformBadges");
+        badgesContainer.innerHTML = selected.platforms.map(p => 
+          `<span class="bg-blue-600/80 text-white font-bold text-[10px] px-2 py-0.5 rounded">${p}</span>`
+        ).join("");
+
+        card.dataset.currentId = selected.id;
+        card.classList.remove("opacity-50", "scale-[0.99]");
+      }, 150);
+    }
+
+    function markWatchedAndNext() {
+      const currentId = parseInt(document.getElementById("movieCard").dataset.currentId);
+      if (currentId && !watchedIds.includes(currentId)) {
+        watchedIds.push(currentId);
+        localStorage.setItem("cine_watched", JSON.stringify(watchedIds));
+      }
+      shuffleMovie();
+    }
+
+    updateTileLabels();
+    shuffleMovie();
+  </script>
+</body>
+</html>
